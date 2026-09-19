@@ -5,9 +5,9 @@ Sentence Idea Optimiser in SWI-Prolog.
 ## Run CLI
 
 ```bash
-swipl /home/runner/work/sentenceideaoptimiser/sentenceideaoptimiser/src/main.pl --sentence "Reverse the list and take the first item"
-swipl /home/runner/work/sentenceideaoptimiser/sentenceideaoptimiser/src/main.pl --rule ab
-swipl /home/runner/work/sentenceideaoptimiser/sentenceideaoptimiser/src/main.pl --from ab --to eb
+swipl /home/runner/work/sentenceideaoptimiser/sentenceideaoptimiser/main.pl --sentence "Reverse the list and take the first item"
+swipl /home/runner/work/sentenceideaoptimiser/sentenceideaoptimiser/main.pl --rule ab
+swipl /home/runner/work/sentenceideaoptimiser/sentenceideaoptimiser/main.pl --from ab --to eb
 ```
 
 ## Ontology extension
