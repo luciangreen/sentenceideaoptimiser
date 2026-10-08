@@ -1,3 +1,3 @@
-:- use_module('/home/runner/work/sentenceideaoptimiser/sentenceideaoptimiser/src/main.pl').
+:- use_module('src/main.pl').
 
 :- initialization(main:run_cli, main).

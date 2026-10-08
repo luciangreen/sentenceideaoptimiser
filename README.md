@@ -11,7 +11,7 @@ The CLI supports 3 command modes and a fallback usage message.
 Use this to analyse a sentence and print a full reasoning report.
 
 ```bash
-swipl /home/runner/work/sentenceideaoptimiser/sentenceideaoptimiser/main.pl \
+swipl main.pl \
   --sentence "Reverse the list and take the first item"
 ```
 
@@ -26,7 +26,7 @@ What it does:
 Use this to inspect how a rule unfolds through recursive expansion.
 
 ```bash
-swipl /home/runner/work/sentenceideaoptimiser/sentenceideaoptimiser/main.pl \
+swipl main.pl \
   --rule ab
 ```
 
@@ -41,7 +41,7 @@ What it does:
 Use this to find the cheapest path between two rules.
 
 ```bash
-swipl /home/runner/work/sentenceideaoptimiser/sentenceideaoptimiser/main.pl \
+swipl main.pl \
   --from ab --to eb
 ```
 
@@ -59,7 +59,7 @@ What it does:
 Use this to print the CLI help text.
 
 ```bash
-swipl /home/runner/work/sentenceideaoptimiser/sentenceideaoptimiser/main.pl
+swipl main.pl
 ```
 
 What it does:
@@ -71,7 +71,7 @@ What it does:
 
 ## Ontology extension
 
-Add facts to files under `/home/runner/work/sentenceideaoptimiser/sentenceideaoptimiser/ontology/` using these forms:
+Add facts to files under `ontology/` using these forms:
 
 - `ontology_rule/7`
 - `rule/2`

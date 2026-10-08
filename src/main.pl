@@ -27,11 +27,13 @@
 :- use_module(optimiser).
 :- use_module(explanation).
 
-:- initialization(run_cli, main).
-
 run_cli :-
     current_prolog_flag(argv, Argv),
-    load_ontology('/home/runner/work/sentenceideaoptimiser/sentenceideaoptimiser/ontology/core_rules.pl'),
+    source_file(main:run_cli, MainFile),
+    file_directory_name(MainFile, SourceDirectory),
+    directory_file_path(SourceDirectory, '../ontology/core_rules.pl', OntologyFile),
+    absolute_file_name(OntologyFile, AbsoluteOntologyFile),
+    load_ontology(AbsoluteOntologyFile),
     handle_args(Argv).
 
 handle_args(['--sentence', SentenceAtom|_]) :-
@@ -49,6 +51,6 @@ handle_args(['--from', From, '--to', To|_]) :-
     ).
 handle_args(_) :-
     writeln('Usage:'),
-    writeln('  swipl src/main.pl --sentence "Reverse the list and take the first item"'),
-    writeln('  swipl src/main.pl --rule ab'),
-    writeln('  swipl src/main.pl --from ab --to eb').
+    writeln('  swipl main.pl --sentence "<text>"'),
+    writeln('  swipl main.pl --rule <rule_id>'),
+    writeln('  swipl main.pl --from <rule_id> --to <rule_id>').
