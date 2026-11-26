@@ -1,6 +1,15 @@
 :- module(explanation, [explain_reasoning/2]).
 
 explain_reasoning(
+    report(sentence(S), parsed_idea(unknown), unknown_words(Words), result(not_understood), _, _),
+    Text
+) :-
+    !,
+    format(string(Text),
+        "Sentence: ~w~nResult: not_understood~nThe sentence did not match any known idea, so no optimisation was attempted.~nWords: ~w",
+        [S, Words]).
+
+explain_reasoning(
     report(
         sentence(S),
         parsed_idea(Idea),

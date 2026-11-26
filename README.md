@@ -86,3 +86,15 @@ Load additional ontology files with `load_ontology/1`.
 ```bash
 swipl -q -g "[tests/parser_tests], [tests/graph_tests], [tests/equivalence_tests], [tests/optimiser_tests], [tests/integration_tests], run_tests, halt"
 ```
+
+## Results
+
+- `not_optimised`: a cheaper equivalent chain was found and proved.
+- `already_optimised`: the sentence was read and no cheaper chain exists.
+- `optimisation_unproved`: a cheaper chain exists but its equivalence is not proved.
+- `no_rules_for_idea`: the sentence was read, but no rule chain is known for it.
+- `not_understood`: the sentence matched no known idea; its words are listed in `unknown_words`.
+
+"X then Y", "X, then Y" and "X and then Y" are read as "X and Y". The tests
+load the program and ontology relative to their own folder, so they run from
+any checkout.
