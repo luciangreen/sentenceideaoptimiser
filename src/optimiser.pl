@@ -44,14 +44,32 @@ optimise_idea(Idea, OptimisedIdea, Proof) :-
     OptimisedIdea = idea_implementation(OptimisedChain),
     Proof = proof(idea(Idea), RuleProof).
 
+% A sentence the parser cannot read is reported as not understood, with its
+% words, rather than as already optimised.
+check_sentence_optimised(Sentence, Report) :-
+    sentence_idea(Sentence, Parsed),
+    Parsed = idea(unknown, unknown_concepts(Words)),
+    !,
+    Report = report(
+        sentence(Sentence),
+        parsed_idea(unknown),
+        unknown_words(Words),
+        result(not_understood),
+        improvement(0),
+        proof([])
+    ).
 check_sentence_optimised(Sentence, Report) :-
     sentence_idea(Sentence, ParsedIdea),
+    !,
     initial_chain(ParsedIdea, OriginalChain),
     chain_cost(OriginalChain, OriginalCost),
     optimise_rule_chain(OriginalChain, AlternativeChain, OptimiseProof),
     chain_cost(AlternativeChain, AlternativeCost),
     equivalent_ideas(OriginalChain, AlternativeChain, Equivalence),
-    status_from_cost_and_equivalence(OriginalCost, AlternativeCost, Equivalence, Status),
+    (   OriginalChain == [unknown_operation]
+    ->  Status = no_rules_for_idea
+    ;   status_from_cost_and_equivalence(OriginalCost, AlternativeCost, Equivalence, Status)
+    ),
     Improvement is OriginalCost - AlternativeCost,
     build_proof(sentence_optimisation, ParsedIdea, OriginalChain, AlternativeChain, MachineProof),
     Report = report(
@@ -70,6 +88,7 @@ check_sentence_optimised(Sentence, Report) :-
 initial_chain(sequence([reverse(_, _, _), first(_, _)]), [reverse_list, first_item]) :- !.
 initial_chain(sequence([reverse, first]), [reverse, first]) :- !.
 initial_chain(idea(operation(find_positions), _, _, _, _, _), [enumerate_input, compare_character, obtain_position, collect_results]) :- !.
+initial_chain(sequence([last(_, _)]), [last_item]) :- !.
 initial_chain(_, [unknown_operation]).
 
 status_from_cost_and_equivalence(C1, C2, proven(_), not_optimised) :- C2 < C1, !.
